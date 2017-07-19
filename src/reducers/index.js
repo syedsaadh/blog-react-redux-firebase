@@ -11,7 +11,7 @@ const initialState = {
     isFetching: false,
     items: {}
 }
-const posts = (state = initialState, action) => {
+const postsFromFirebase = (state = initialState, action) => {
     switch (action.type) {
         case REQUEST_ALL_POSTS:
             return {
@@ -31,7 +31,7 @@ const posts = (state = initialState, action) => {
 }
 
 const rootReducer = combineReducers({
-    posts
+    postsFromFirebase
 })
 
 export default rootReducer

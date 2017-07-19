@@ -1,8 +1,10 @@
 import * as firebase from 'firebase';
+import { config } from '../firebase.config';
+import { each as _each } from 'lodash';
 export const REQUEST_ALL_POSTS = 'REQUEST_ALL_POSTS';
 export const RECEIVED_ALL_POSTS = 'RECEIVED_ALL_POSTS';
 export const FAILED_RECEIVE_POSTS = 'FAILED_RECEIVE_POSTS';
-import {config} from '../firebase.config'
+
 firebase.initializeApp(config);
 
 const database = firebase.database();
@@ -15,7 +17,7 @@ export const requestAllPosts = () => ({
 export const receivedAllPosts = (json) => ({
     type: RECEIVED_ALL_POSTS,
     payload: {
-        posts : json
+        posts: json
     },
     receivedAt: Date.now()
 })
@@ -32,8 +34,9 @@ export const fetchPosts = () => dispatch => {
             console.log('Error');
         })
         .then(json => {
-            console.log(json);
-            dispatch(receivedAllPosts(json))
+            let articles = [];
+            _each(json, (article) => articles.push(article))
+            dispatch(receivedAllPosts(articles))
         });
 
 }
