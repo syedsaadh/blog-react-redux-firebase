@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {isEmpty as _isEmpty} from 'lodash';
 import { fetchPosts } from '../actions'
-import DevTools from './DevTools'
+import PostList from '../components/PostsList'
 
 class App extends Component {
     componentDidMount() {
@@ -14,22 +15,30 @@ class App extends Component {
         dispatch(fetchPosts())
     }
     render() {
-        const { posts } = this.props;
+        const { items, isFetching } = this.props;
+        const isEmpty = _isEmpty(items);
         return (
             <div>
-                <DevTools />
-                <button onClick={this.handleRefresh.bind(this)}>Refresh</button>
-                <p> hello </p>
+                {
+                    !isFetching &&
+                    <button onClick={this.handleRefresh.bind(this)}>Refresh</button>
+                }
+                {
+                    isFetching && <h1>Loading...</h1>  
+                }
+                {
+                    !isEmpty && <PostList posts={items.posts}/>
+                }
             </div>
         )
     };
 }
 const mapStateToProps = state => {
-    const { posts } = state;
-    const { isFetching, lastUpdated, items } = { isFetching: true, items: {} };
+    const { postsFromFirebase } = state;
+    const { isFetching, lastUpdated, items } = postsFromFirebase;
 
     return {
-        posts,
+        items,
         isFetching,
         lastUpdated
     }
