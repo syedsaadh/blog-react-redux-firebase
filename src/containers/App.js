@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import {isEmpty as _isEmpty} from 'lodash';
 import { fetchPostsIfNeeded, fetchPosts } from '../actions'
 import PostList from '../components/PostsList'
-import { Route, Link } from 'react-router-dom';
-import ArticlePage from './ArticlePage';
 
 class App extends Component {
     componentDidMount() {
