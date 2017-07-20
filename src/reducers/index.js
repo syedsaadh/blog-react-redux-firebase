@@ -4,7 +4,8 @@ import {
 import {
     RECEIVED_ALL_POSTS,
     REQUEST_ALL_POSTS,
-    FAILED_RECEIVE_POSTS
+    FAILED_RECEIVE_POSTS,
+    SELECT_ARTICLE
 } from '../actions'
 
 const initialState = {
@@ -29,9 +30,26 @@ const postsFromFirebase = (state = initialState, action) => {
             return state
     }
 }
+const initialSelectedPost = {
+    slug: '',
+    post: {}
+}
+const selectedArticle = (state = initialSelectedPost, action) => {
+    switch (action.type) {
+        case SELECT_ARTICLE:
+            return {
+                ...state,
+                slug: action.slug,
+                post: action.post
+            };
+        default:
+            return state
+    }
+}
 
 const rootReducer = combineReducers({
-    postsFromFirebase
+    postsFromFirebase,
+    selectedArticle
 })
 
 export default rootReducer
