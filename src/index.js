@@ -1,8 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import App from './containers/App';
+import ArticlePage from './containers/ArticlePage';
 
 import configureStore from './store/configureStore'
 import DevTools from './containers/DevTools'
@@ -18,7 +19,11 @@ render(
     <div>
       <DevTools />
       <ConnectedRouter history={history}>
-          <Route path="/" component={App} />
+        <div>
+          <Link to="/">Home</Link>
+          <Route exact path="/" component={App} />
+          <Route path="/post/:slug" component={ArticlePage} />
+        </div>
       </ConnectedRouter>
     </div>
   </Provider>,
