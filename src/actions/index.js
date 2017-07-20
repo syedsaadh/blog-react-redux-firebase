@@ -10,6 +10,7 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 const postListRef = database.ref('posts');
+const articleRef = database.ref('posts').orderByChild('slug');
 
 export const requestAllPosts = () => ({
     type: REQUEST_ALL_POSTS
@@ -41,6 +42,19 @@ export const fetchPosts = () => dispatch => {
         });
 
 }
+const shouldFetchPosts = (state) => {
+  const posts = state.postsFromFirebase;
+  if (!posts.items.posts && !posts.isFetching) {
+    return true
+  }
+  return false;
+}
+
+export const fetchPostsIfNeeded = () => (dispatch, getState) => {
+  if (shouldFetchPosts(getState())) {
+    return dispatch(fetchPosts())
+  }
+}
 
 export const SELECT_ARTICLE = 'SELECT_ARTICLE';
 export const selectArticle = (slug, post) => ({
@@ -48,3 +62,40 @@ export const selectArticle = (slug, post) => ({
     slug,
     post
 })
+
+export const REQUEST_ARTICLE = 'REQUEST_ARTICLE';
+export const RECEIVED_ARTICLE = 'RECEIVED_ARTICLE';
+export const FAILED_RECEIVE_ARTICLE = 'FAILED_RECEIVE_ARTICLE';
+export const NOT_FOUND_ARTICLE = 'NOT_FOUND_ARTICLE';
+
+export const requestArticle = (slug) => ({
+    type: REQUEST_ARTICLE,
+    slug
+})
+
+export const receivedArticle = (post) => ({
+    type: RECEIVED_ARTICLE,
+    post,
+    receivedAt: Date.now()
+})
+
+export const failedReceiveArticle = () => ({
+    type: FAILED_RECEIVE_ARTICLE
+})
+
+export const notFoundArticle = () => ({
+    type: NOT_FOUND_ARTICLE
+})
+
+export const fetchArticle = (slug) => dispatch => {
+    dispatch(requestArticle(slug))
+    return articleRef.equalTo(slug).once('value')
+        .then(response => response.val())
+        .then(json => {
+            if(!json) return dispatch(notFoundArticle())
+            let post = json[Object.keys(json)[0]];
+            dispatch(receivedArticle(post))
+            dispatch(selectArticle(post.slug, post))
+        });
+
+}
