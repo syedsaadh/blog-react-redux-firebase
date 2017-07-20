@@ -13,10 +13,16 @@ class ArticlePage extends Component {
         const { post } = this.props;
         return renderHtml(md.render(post.desc || ''));
     }
-    componentDidMount() {
+    componentWillMount() {
         const { dispatch, post, match } = this.props;
         if (!post.desc) {
             dispatch(fetchArticle(match.params.slug))
+        }
+    }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.notFound) {
+            const { history } = nextProps;
+            history.push('/');
         }
     }
     render() {
@@ -39,11 +45,12 @@ class ArticlePage extends Component {
 const mapStateToProps = state => {
     const { selectedArticle, articleFromFirebase } = state;
     const { slug, post } = selectedArticle;
-    const { isFetching } = articleFromFirebase;
+    const { isFetching, notFound } = articleFromFirebase;
     return {
         slug,
         post,
-        isFetching
+        isFetching,
+        notFound
     }
 }
 export default connect(mapStateToProps)(ArticlePage);
