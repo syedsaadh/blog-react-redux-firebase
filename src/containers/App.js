@@ -5,6 +5,7 @@ import { fetchPosts } from '../actions'
 import PostList from '../components/PostsList'
 import { Route, Link } from 'react-router-dom';
 import ArticlePage from './ArticlePage';
+
 class App extends Component {
     componentDidMount() {
         const { dispatch } = this.props
@@ -29,7 +30,7 @@ class App extends Component {
                     isFetching && <h1>Loading...</h1>  
                 }
                 {
-                    !isEmpty && <PostList posts={items.posts}/>
+                    !isEmpty && <PostList posts={items.posts} dispatch= {this.props.dispatch}/>
                 }
                 <Route path="/post/:slug" component={ArticlePage} />
             </div>
