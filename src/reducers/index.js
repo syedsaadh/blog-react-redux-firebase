@@ -5,7 +5,11 @@ import {
     RECEIVED_ALL_POSTS,
     REQUEST_ALL_POSTS,
     FAILED_RECEIVE_POSTS,
-    SELECT_ARTICLE
+    SELECT_ARTICLE,
+    REQUEST_ARTICLE, 
+    RECEIVED_ARTICLE, 
+    FAILED_RECEIVE_ARTICLE,
+    NOT_FOUND_ARTICLE
 } from '../actions'
 
 const initialState = {
@@ -46,10 +50,30 @@ const selectedArticle = (state = initialSelectedPost, action) => {
             return state
     }
 }
-
+const initialArticleFromFirebase = {
+    isFetching: false,
+    post: {}
+}
+const articleFromFirebase = (state = initialArticleFromFirebase, action) => {
+    switch (action.type) {
+        case REQUEST_ARTICLE: {
+            return {...state, isFetching: true}
+        }
+        case RECEIVED_ARTICLE: {
+            return {...state, isFetching:false, post: action.post}
+        }
+        case NOT_FOUND_ARTICLE: {
+            alert('Not Found')
+            return state;
+        }
+        default: 
+            return state;
+    }
+}
 const rootReducer = combineReducers({
     postsFromFirebase,
-    selectedArticle
+    selectedArticle,
+    articleFromFirebase
 })
 
 export default rootReducer
