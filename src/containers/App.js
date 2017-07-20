@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {isEmpty as _isEmpty} from 'lodash';
+import { isEmpty as _isEmpty } from 'lodash';
 import { fetchPostsIfNeeded, fetchPosts } from '../actions'
 import PostList from '../components/PostsList'
 
@@ -14,22 +14,25 @@ class App extends Component {
         e.preventDefault();
         dispatch(fetchPosts())
     }
-    
+
     render() {
         const { items, isFetching } = this.props;
         const isEmpty = _isEmpty(items);
         return (
-            <div>
+            <div >
+                {
+                    !isEmpty && <div style={{ opacity: isFetching ? 0.2 : 1 }}>
+                        <PostList posts={items.posts} dispatch={this.props.dispatch} />
+                    </div>
+                }
                 {
                     !isFetching &&
                     <button onClick={this.handleRefresh.bind(this)}>Refresh</button>
                 }
                 {
-                    isFetching && <h1>Loading...</h1>  
+                    isFetching && <h2>Loading...</h2>
                 }
-                {
-                    !isEmpty && <PostList posts={items.posts} dispatch= {this.props.dispatch}/>
-                }
+
                 {/* <Route path="/post/:slug" component={ArticlePage} /> */}
             </div>
         )
