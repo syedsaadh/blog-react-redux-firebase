@@ -19,19 +19,20 @@ class App extends Component {
         const { items, isFetching } = this.props;
         const isEmpty = _isEmpty(items);
         return (
-            <div >
-                {
-                    !isEmpty && <div style={{ opacity: isFetching ? 0.2 : 1 }}>
-                        <PostList posts={items.posts} dispatch={this.props.dispatch} />
-                    </div>
-                }
+            <div className="container">
                 {
                     !isFetching &&
-                    <button onClick={this.handleRefresh.bind(this)}>Refresh</button>
+                    <button type="button" className="btn btn-primary pull-right" onClick={this.handleRefresh.bind(this)}>Refresh</button>
                 }
                 {
                     isFetching && <h2>Loading...</h2>
                 }
+                {
+                    !isEmpty && <div className="container" style={{ opacity: isFetching ? 0.2 : 1 }}>
+                        <PostList posts={items.posts} dispatch={this.props.dispatch} />
+                    </div>
+                }
+                
 
                 {/* <Route path="/post/:slug" component={ArticlePage} /> */}
             </div>
