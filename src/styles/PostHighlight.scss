@@ -1,0 +1,40 @@
+$padding : 50px;
+$primary-color : #59b0d0;
+$link-color : $primary-color;
+$visited-link : darken($link-color, 10%);
+$text-h-color : #434a54;
+a {
+    color: $primary-color;
+    transition: color ease 0.3s;
+}
+a:visited {
+    color: $visited-link
+}
+a:hover {
+    color: $visited-link;
+    text-decoration: underline;
+}
+
+/* selected link */
+a:active {
+    color: $visited-link
+}
+article h2 {
+    font-size: 2rem;
+    line-height: 1.2em;
+}
+.post-highlight {
+    position: relative;
+    width: 80%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+    border-bottom: $primary-color 1px solid;
+}
+.post-title a {
+    text-decoration: none;
+    color: $text-h-color;
+}
+.post-title a:hover {
+    color: $primary-color;
+}

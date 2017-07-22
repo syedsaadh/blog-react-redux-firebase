@@ -1,0 +1,33 @@
+a {
+  color: #59b0d0;
+  transition: color ease 0.3s; }
+
+a:visited {
+  color: #369bc0; }
+
+a:hover {
+  color: #369bc0;
+  text-decoration: underline; }
+
+/* selected link */
+a:active {
+  color: #369bc0; }
+
+article h2 {
+  font-size: 2rem;
+  line-height: 1.2em; }
+
+.post-highlight {
+  position: relative;
+  width: 80%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+  border-bottom: #59b0d0 1px solid; }
+
+.post-title a {
+  text-decoration: none;
+  color: #434a54; }
+
+.post-title a:hover {
+  color: #59b0d0; }
