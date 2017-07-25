@@ -6,6 +6,8 @@ import { Route, Switch, Link } from 'react-router-dom';
 import App from './containers/App';
 import ArticlePage from './containers/ArticlePage';
 import NoMatch from './containers/NoMatch';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 import configureStore from './store/configureStore'
 import DevTools from './containers/DevTools'
@@ -20,14 +22,14 @@ render(
     <div>
       <DevTools />
       <ConnectedRouter history={history}>
-        <div>
-          <Link to="/">Home</Link>&nbsp;&nbsp;
-          <Link to="/sda">No Match</Link>
+        <div style={{width:'100%'}}>
+          <Navbar />
           <Switch>
             <Route exact path="/" component={App} />
             <Route path="/post/:slug" component={ArticlePage} />
             <Route component={NoMatch} />
           </Switch>
+          <Footer/>
         </div>
       </ConnectedRouter>
     </div>
