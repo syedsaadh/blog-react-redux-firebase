@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import * as markdown from 'markdown-it';
 import renderHtml from 'react-render-html';
 import { fetchArticle } from '../actions'
+import '../styles/ArticlePage.css';
+
 var md = new markdown({
     html: true,
     linkify: true,
@@ -28,12 +30,12 @@ class ArticlePage extends Component {
     render() {
         const { isFetching } = this.props;
         return (
-            <div>
+            <div className = "post-container">
                 {
                     isFetching && <h3>Loading..</h3>
                 }
-                <h1>{this.props.post.title}</h1>
-                <div>
+                <h1 className="post-title">{this.props.post.title}</h1>
+                <div className="post-content">
                     {
                         !isFetching && this.renderPost()
                     }
