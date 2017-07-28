@@ -14,11 +14,17 @@ class Navbar extends Component {
   }
   render() {
     const { session } = this.props;
-    let button = null;
+    let menu = null;
     if (!session) {
-      button = <a onClick={this.handleSignIn.bind(this)}>LOGIN</a>
+      menu = <ul className="nav navbar-nav navbar-right">
+        <li><a onClick={this.handleSignIn.bind(this)}>LOGIN</a></li>
+        </ul>
     } else {
-      button = <a onClick={this.handleLogout.bind(this)}>LOGOUT</a>
+      menu = <ul className="nav navbar-nav navbar-right">
+        <li><Link to="/dashboard/write">Write Post</Link></li>
+        <li><Link to="/dashboard">My Profile</Link></li>
+        <li><a onClick={this.handleLogout.bind(this)}>LOGOUT</a></li>
+        </ul>
     }
     return (
       <nav className="navbar navbar-default" role="navigation">
@@ -33,10 +39,7 @@ class Navbar extends Component {
             <Link className="navbar-brand" to="/">ReactRedux Blog</Link>
           </div>
           <div className="collapse navbar-collapse" id="myNavbar">
-            <ul className="nav navbar-nav navbar-right">
-              {session && <li><Link to="/dashboard">DASHBOARD</Link></li>}
-              <li>{button}</li>
-            </ul>
+            {menu}
           </div>
         </div>
       </nav>
