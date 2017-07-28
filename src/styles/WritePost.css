@@ -1,0 +1,23 @@
+.textarea {
+  border: none;
+  border-right: 1px solid #E8E8E8;
+  float: left;
+  height: calc(100vh - 172px);
+  padding-right: 16px;
+  width: 100%;
+  overflow: scroll; }
+
+.preview {
+  height: calc(100vh - 172px);
+  overflow: scroll; }
+
+.input-borderless {
+  font-size: 3rem;
+  border: none;
+  width: 100%;
+  padding: 20px;
+  outline: none;
+  font-weight: bold; }
+
+.pad-top-bottom {
+  padding: 20px 0px; }

@@ -3,13 +3,14 @@ $primary-color: #6bc6ed;
         background: white;
         padding-top: 15px;
         padding-bottom: 15px;
-        padding-left: 15px;
-        padding-right: 15px;
+        width: 80%;
+        max-width: 1000px;
         border: 0;
+        margin: 0 auto;
         border-radius: 0;
-        margin-bottom: 0;
         font-size: 12px;
         letter-spacing: 5px;
+        border-bottom: 1px solid #e4e4e4;
 }
 .navbar-default .navbar-text, .navbar-default .navbar-nav > li > a {
     color: $primary-color;
