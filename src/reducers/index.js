@@ -1,6 +1,7 @@
 import {
     combineReducers
 } from 'redux'
+import session from './sessionReducer'
 import {
     RECEIVED_ALL_POSTS,
     REQUEST_ALL_POSTS,
@@ -79,7 +80,8 @@ const articleFromFirebase = (state = initialArticleFromFirebase, action) => {
 const rootReducer = combineReducers({
     postsFromFirebase,
     selectedArticle,
-    articleFromFirebase
+    articleFromFirebase,
+    session
 })
 
 export default rootReducer
