@@ -1,0 +1,33 @@
+$primary-color: #6bc6ed;
+.navbar {
+        background: white;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border: 0;
+        border-radius: 0;
+        margin-bottom: 0;
+        font-size: 12px;
+        letter-spacing: 5px;
+}
+.navbar-default .navbar-text, .navbar-default .navbar-nav > li > a {
+    color: $primary-color;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: $primary-color;
+}
+
+.navbar-nav  li a:hover {
+        color: $primary-color !important;
+}
+.navbar-brand:hover {
+    color: $primary-color !important;
+}
+.navbar-brand, .navbar-brand:focus, .navbar-brand:hover {
+    color: $primary-color !important;
+}
+.navbar-brand img {
+      width: 150px;
+      margin-top: -5px;
+}
