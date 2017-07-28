@@ -19,11 +19,7 @@ class App extends Component {
         const { items, isFetching } = this.props;
         const isEmpty = _isEmpty(items);
         return (
-            <div className="container">
-                {
-                    !isFetching &&
-                    <button type="button" className="btn btn-primary pull-right" onClick={this.handleRefresh.bind(this)}>Refresh</button>
-                }
+            <div className="container" style={{paddingBottom: '60px'}}>
                 {
                     isFetching && <h2>Loading...</h2>
                 }
