@@ -9,6 +9,7 @@ import MyStories from './Dashboard/MyStories';
 import WritePost from './Dashboard/WritePost';
 import Home from './Dashboard/Home';
 
+import '../styles/Dashboard.css';
 class Dashboard extends React.Component {
     handleLogout() {
         const { dispatch } = this.props;

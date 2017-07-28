@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { isEmpty as _isEmpty } from 'lodash';
 import { fetchPostsIfNeeded, fetchPosts } from '../actions'
 import PostList from '../components/PostsList'
+import '../styles/App.css';
 
 class App extends Component {
     componentDidMount() {
@@ -19,18 +20,13 @@ class App extends Component {
         const { items, isFetching } = this.props;
         const isEmpty = _isEmpty(items);
         return (
-            <div className="container" style={{paddingBottom: '60px'}}>
+                <div className="post-highlight-section" style={{ opacity: isFetching ? 0.2 : 1 }}>
                 {
-                    isFetching && <h2>Loading...</h2>
+                    isFetching && <h4>Loading...</h4>
                 }
                 {
-                    !isEmpty && <div className="container" style={{ opacity: isFetching ? 0.2 : 1 }}>
-                        <PostList posts={items.posts} dispatch={this.props.dispatch} />
-                    </div>
+                    !isEmpty && <PostList posts={items.posts} dispatch={this.props.dispatch} />
                 }
-                
-
-                {/* <Route path="/post/:slug" component={ArticlePage} /> */}
             </div>
         )
     };
